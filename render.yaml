@@ -10,7 +10,7 @@ services:
       - key: PORT
         value: 8069
       - key: DB_HOST
-        value: ep-divine-lab-a45nny5y-pooler.us-east-1.aws.neon.tech
+        value: ep-divine-lab-a45nny5y.us-east-1.aws.neon.tech
       - key: DB_PORT
         value: 5432
       - key: DB_USER
