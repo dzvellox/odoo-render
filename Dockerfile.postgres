@@ -1,0 +1,6 @@
+FROM postgres:15-alpine
+
+# Exposer le port PostgreSQL
+EXPOSE 5432
+
+# Le reste est géré par l'image PostgreSQL officielle
