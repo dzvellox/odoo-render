@@ -9,20 +9,36 @@ echo "🔒 SSL: ${PGSSLMODE:-require}"
 # Attendre que la connexion réseau soit stable
 sleep 5
 
-# Configuration spéciale pour Neon.tech (pooled connection)
-# Utiliser un pool de connexions très limité pour éviter les conflits
+DB_NAME_VAR="${DB_NAME:-odoo}"
+
+# Initialiser la base (--init=base ne fait rien si déjà initialisée)
+echo "🔧 Initialisation/vérification de la base..."
+
+odoo \
+  --db_host="$DB_HOST" \
+  --db_port="${DB_PORT:-5432}" \
+  --db_user="$DB_USER" \
+  --db_password="$DB_PASSWORD" \
+  --database="$DB_NAME_VAR" \
+  --db-template="${DB_TEMPLATE:-template0}" \
+  --init=base \
+  --without-demo=all \
+  --stop-after-init
+
+echo "✅ Base prête ! Démarrage du serveur..."
+
+# Démarrer Odoo normalement
 exec odoo \
   --db_host="$DB_HOST" \
   --db_port="${DB_PORT:-5432}" \
   --db_user="$DB_USER" \
   --db_password="$DB_PASSWORD" \
-  --database="${DB_NAME:-odoo}" \
+  --database="$DB_NAME_VAR" \
   --db_maxconn="${DB_MAXCONN:-3}" \
-  --db-template="${DB_TEMPLATE:-template0}" \
   --data-dir="/var/lib/odoo" \
   --http-port="${PORT:-8069}" \
   --proxy-mode \
-  --log-level=warn \
+  --log-level=info \
   --limit-time-cpu=600 \
   --limit-time-real=1200 \
   --workers=0 \

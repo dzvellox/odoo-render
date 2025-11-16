@@ -25,3 +25,5 @@ services:
         value: template0
       - key: DB_MAXCONN
         value: 3
+      - key: PGDATABASE
+        value: production
