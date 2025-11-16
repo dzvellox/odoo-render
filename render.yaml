@@ -10,7 +10,7 @@ services:
       - key: PORT
         value: 8069
       - key: DB_HOST
-        value: ep-divine-lab-a45nny5y-pooler.us-east-1.aws.neon.tech
+        value: ep-divine-lab-a45nny5y.us-east-1.aws.neon.tech
       - key: DB_PORT
         value: 5432
       - key: DB_USER
@@ -18,12 +18,14 @@ services:
       - key: DB_PASSWORD
         value: npg_wQPuv6cRdg7W
       - key: DB_NAME
-        value: production
+        value: yas
       - key: PGSSLMODE
         value: require
       - key: DB_TEMPLATE
         value: template0
       - key: DB_MAXCONN
-        value: 3
+        value: 1
       - key: PGDATABASE
-        value: production
+        value: yas
+      - key: PGOPTIONS
+        value: -c statement_timeout=0 -c lock_timeout=60000

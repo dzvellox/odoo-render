@@ -11,8 +11,11 @@ sleep 5
 
 DB_NAME_VAR="${DB_NAME:-odoo}"
 
-# Initialiser la base (--init=base ne fait rien si déjà initialisée)
-echo "🔧 Initialisation/vérification de la base..."
+# Initialiser la base avec des timeouts étendus pour Neon.tech
+echo "🔧 Initialisation/vérification de la base (cela peut prendre 3-5 minutes)..."
+
+# Forcer les timeouts PostgreSQL via PGOPTIONS
+export PGOPTIONS="-c statement_timeout=0 -c lock_timeout=60000 -c idle_in_transaction_session_timeout=0"
 
 odoo \
   --db_host="$DB_HOST" \
@@ -23,18 +26,21 @@ odoo \
   --db-template="${DB_TEMPLATE:-template0}" \
   --init=base \
   --without-demo=all \
+  --db_maxconn=1 \
   --stop-after-init
 
 echo "✅ Base prête ! Démarrage du serveur..."
 
-# Démarrer Odoo normalement
+# Démarrer Odoo normalement (sans PGOPTIONS pour éviter les problèmes)
+unset PGOPTIONS
+
 exec odoo \
   --db_host="$DB_HOST" \
   --db_port="${DB_PORT:-5432}" \
   --db_user="$DB_USER" \
   --db_password="$DB_PASSWORD" \
   --database="$DB_NAME_VAR" \
-  --db_maxconn="${DB_MAXCONN:-3}" \
+  --db_maxconn=2 \
   --data-dir="/var/lib/odoo" \
   --http-port="${PORT:-8069}" \
   --proxy-mode \
