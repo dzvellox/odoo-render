@@ -1,13 +1,11 @@
 #!/bin/bash
 set -e
 
-# Attendre que PostgreSQL soit prêt
-until PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d postgres -c '\q' 2>/dev/null; do
-  >&2 echo "PostgreSQL n'est pas encore prêt - attente..."
-  sleep 2
-done
+echo "🚀 Démarrage d'Odoo..."
+echo "📊 Base de données: $DB_HOST:${DB_PORT:-5432}/$DB_NAME"
 
->&2 echo "PostgreSQL est prêt - démarrage d'Odoo"
+# Attendre un peu pour laisser le temps à la DB de répondre
+sleep 3
 
 # Lancer Odoo avec les paramètres de configuration
 exec odoo \
