@@ -19,5 +19,5 @@ services:
         value: npg_wQPuv6cRdg7W
       - key: PGSSLMODE
         value: require
-      - key: DB_MAXCONN
-        value: 10
+      - key: DB_TEMPLATE
+        value: template0
