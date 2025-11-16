@@ -2,6 +2,9 @@ FROM odoo:17.0
 
 USER root
 
+# Installer psql pour vérifier l'état de la base
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
 # Créer le répertoire pour les données Odoo
 RUN mkdir -p /var/lib/odoo && \
     chown -R odoo:odoo /var/lib/odoo

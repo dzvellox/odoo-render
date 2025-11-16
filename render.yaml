@@ -6,6 +6,7 @@ services:
     plan: free
     region: frankfurt
     dockerfilePath: ./Dockerfile
+    healthCheckPath: /
     envVars:
       - key: PORT
         value: 8069
@@ -24,8 +25,6 @@ services:
       - key: DB_TEMPLATE
         value: template0
       - key: DB_MAXCONN
-        value: 1
+        value: 2
       - key: PGDATABASE
         value: yas
-      - key: PGOPTIONS
-        value: -c statement_timeout=0 -c lock_timeout=60000
