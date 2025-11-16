@@ -17,5 +17,4 @@ exec odoo \
   --data-dir="/var/lib/odoo" \
   --http-port="${PORT:-8069}" \
   --without-demo=all \
-  --proxy-mode \
-  "$@"
+  --proxy-mode
