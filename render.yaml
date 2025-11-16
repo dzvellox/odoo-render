@@ -1,0 +1,60 @@
+services:
+  # Base de données PostgreSQL
+  - type: pserv
+    name: odoo-db
+    env: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile.postgres
+    envVars:
+      - key: POSTGRES_DB
+        value: odoo
+      - key: POSTGRES_USER
+        value: odoo
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+
+  # Application Odoo
+  - type: web
+    name: odoo-app
+    env: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: HOST
+        fromService:
+          type: pserv
+          name: odoo-db
+          property: host
+      - key: PORT
+        value: 8069
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: odoo-db
+          property: host
+      - key: DB_PORT
+        fromService:
+          type: pserv
+          name: odoo-db
+          property: port
+      - key: DB_USER
+        value: odoo
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: odoo-db
+          envVarKey: POSTGRES_PASSWORD
+      - key: DB_NAME
+        value: odoo
+      - key: ADMIN_PASSWD
+        generateValue: true
+    disk:
+      name: odoo-data
+      mountPath: /var/lib/odoo
+      sizeGB: 1
