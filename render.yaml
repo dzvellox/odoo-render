@@ -4,7 +4,7 @@ services:
     name: odoo-app
     env: docker
     plan: free
-    region: frankfurt
+    region: oregon
     dockerfilePath: ./Dockerfile
     envVars:
       - key: PORT
