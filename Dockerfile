@@ -2,6 +2,15 @@ FROM odoo:17.0
 
 USER root
 
+# Installer postgresql-client pour tester la connexion
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        postgresql-client \
+        iputils-ping \
+        dnsutils && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Créer le répertoire pour les données Odoo
 RUN mkdir -p /var/lib/odoo && \
     chown -R odoo:odoo /var/lib/odoo
