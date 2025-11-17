@@ -14,9 +14,9 @@ services:
       - key: DB_PORT
         value: 5432
       - key: DB_USER
-        value: postgres
+        value: odoo
       - key: DB_PASSWORD
-        value: djB5WRA4XAHtWl0T
+        value: OdooPass2024Strong!
       - key: DB_NAME
         value: postgres
       - key: PGSSLMODE
