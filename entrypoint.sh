@@ -2,14 +2,13 @@
 set -e
 
 echo "🚀 Démarrage d'Odoo avec Supabase..."
-echo "📊 Base de données: $DB_HOST:${DB_PORT:-5432}/$DB_NAME"
+echo "📊 Base de données: $DB_HOST:${DB_PORT:-5432}"
 echo "🔒 Mode SSL: ${PGSSLMODE:-require}"
 
 # Attendre que le réseau soit stable
 sleep 5
 
-# Lancer Odoo SANS initialisation automatique
-# On laissera l'utilisateur créer la base via l'interface web
+# Lancer Odoo - database manager activé
 exec odoo \
   --db_host="$DB_HOST" \
   --db_port="${DB_PORT:-5432}" \
@@ -19,5 +18,4 @@ exec odoo \
   --http-port="${PORT:-8069}" \
   --proxy-mode \
   --workers=0 \
-  --max-cron-threads=0 \
-  --no-database-list
+  --max-cron-threads=0
