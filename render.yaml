@@ -7,6 +7,8 @@ services:
     region: oregon
     dockerfilePath: ./Dockerfile
     envVars:
+      - key: DB_HOST_FORCE_IPV4
+        value: True  # <-- AJOUTEZ CETTE LIGNE
       - key: PORT
         value: 8069
       - key: DB_HOST
