@@ -1,30 +1,23 @@
 services:
-  # Application Odoo uniquement
+  # Application Odoo avec Supabase PostgreSQL
   - type: web
     name: odoo-app
     env: docker
     plan: free
     region: frankfurt
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /
     envVars:
       - key: PORT
         value: 8069
       - key: DB_HOST
-        value: ep-divine-lab-a45nny5y.us-east-1.aws.neon.tech
+        value: db.gqcygmyvdhasltkxzjcm.supabase.co
       - key: DB_PORT
         value: 5432
       - key: DB_USER
-        value: neondb_owner
+        value: postgres
       - key: DB_PASSWORD
-        value: npg_wQPuv6cRdg7W
+        value: axWZtVWR6HZ0fkCL
       - key: DB_NAME
-        value: yas
+        value: postgres
       - key: PGSSLMODE
         value: require
-      - key: DB_TEMPLATE
-        value: template0
-      - key: DB_MAXCONN
-        value: 2
-      - key: PGDATABASE
-        value: yas
