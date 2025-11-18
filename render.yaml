@@ -8,7 +8,7 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DB_HOST_FORCE_IPV4
-        value: True  # <-- AJOUTEZ CETTE LIGNE
+        value: True  # <-- AJOUTEZ CETTE LIGNE valSuCUEULtBgug8
       - key: PORT
         value: 8069
       - key: DB_HOST
@@ -16,7 +16,7 @@ services:
       - key: DB_PORT
         value: 5432
       - key: DB_USER
-        value: postgres
+        value: odoo
       - key: DB_PASSWORD
         value: valSuCUEULtBgug8
       - key: DB_NAME
